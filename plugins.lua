@@ -93,7 +93,14 @@ local plugins = {
   {
     "mfussenegger/nvim-jdtls",
     ft = {"java"}
+  },
+  {
+    'barrett-ruth/live-server.nvim',
+    build = 'npm i live-server',
+    config = true,
+    ft = {"html","php","js"}
   }
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
