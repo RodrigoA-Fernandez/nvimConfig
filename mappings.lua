@@ -4,6 +4,7 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["md"] = { "<Cmd>lua vim.diagnostic.open_float() <CR>", "Expandir Diagnóstico", opts = {nowait = true }},
   },
 }
 
