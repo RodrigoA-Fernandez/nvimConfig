@@ -54,6 +54,12 @@ M.nvimtree = {
       },
     },
   },
+  disable_netrw = false,
+  hijack_netrw = false,
+}
+
+M.telescope = {
+  extensions_list = { "themes", "terms", "fzf", "luasnip" },
 }
 
 return M

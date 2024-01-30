@@ -4,36 +4,61 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
-    ["md"] = { "<Cmd>lua vim.diagnostic.open_float() <CR>", "Expandir Diagnóstico", opts = {nowait = true }},
+    ["md"] = {
+      '<Cmd>lua vim.diagnostic.open_float{ border = "rounded"} <CR>',
+      "Expandir Diagnóstico",
+      opts = { nowait = true },
+    },
+    ["<leader>sl"] = { "<Cmd> LTeXSetLanguage <CR>", "Establecer Idioma LTeX-lsp" },
+    ["<leader>la"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "Ejecutar acciones de código del lsp",
+    },
   },
 }
 
 -- more keybinds!
-M.dap ={
+M.dap = {
   n = {
     ["<leader>db"] = {
       "<cmd> DapToggleBreakpoint <CR>",
-      "Toggle breakpoint"
+      "Toggle breakpoint",
     },
     ["<leader>dus"] = {
-      function ()
-        local widgets = require("dap.ui.widgets");
-        local sidebar = widgets.sidebar(widgets.scopes);
+      function()
+        local widgets = require "dap.ui.widgets"
+        local sidebar = widgets.sidebar(widgets.scopes)
         sidebar.open()
       end,
-      "open debugging sidebar"
-    }
-  }
+      "open debugging sidebar",
+    },
+  },
 }
 
 M.crates = {
   n = {
     ["<leader>rcu"] = {
-      function ()
-        require('crates').upgrade_all_crates()
+      function()
+        require("crates").upgrade_all_crates()
       end,
-      "update crates"
-    }
-  }
+      "update crates",
+    },
+  },
 }
-return M 
+
+M.telescope = {
+  plugin = true,
+  n = {
+    ["<leader>fs"] = {
+      function()
+        require("telescope").load_extension "luasnip"
+        vim.cmd "Telescope luasnip"
+      end,
+      "Buscar Snippets",
+    },
+  },
+}
+
+return M

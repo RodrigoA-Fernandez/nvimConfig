@@ -5,6 +5,9 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
-vim.cmd("set relativenumber")
+vim.cmd "set relativenumber"
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
+
+-- vim.opt.spelllang = {'es_es', 'en_gb'}
+-- vim.opt.spell = true
