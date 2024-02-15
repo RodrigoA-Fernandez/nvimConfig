@@ -16,6 +16,14 @@ M.general = {
       end,
       "Ejecutar acciones de código del lsp",
     },
+    ["<leader>ln"] = {
+      vim.diagnostic.goto_next,
+      "Siguiente diagnóstico",
+    },
+    ["<leader>lp"] = {
+      vim.diagnostic.goto_prev,
+      "Siguiente diagnóstico",
+    },
   },
 }
 

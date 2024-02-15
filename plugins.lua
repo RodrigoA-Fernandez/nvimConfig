@@ -181,25 +181,33 @@ local plugins = {
       }
     end,
   },
+  -- {
+  --   "enderh5/logseq-nvim",
+  --   dir = "~/Documents/logseq-nvim",
+  --   lazy = false,
+  --   dependencies = {
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("logseq-nvim").setup {
+  --       graphs = { "~/PruebaLogseq/", "~/Documents/Scouts/" },
+  --       autopairs = true,
+  --     }
+  --   end,
+  -- },
   {
-    "enderh5/logseq-nvim",
-    dir = "~/Documentos/logseq-nvim",
+    "vimwiki/vimwiki",
     ft = { "md", "markdown" },
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-    },
     config = function()
-      require("logseq-nvim").setup {
-        graphs = { "~/PruebaLogseq/" },
-        autopairs = true,
-      }
+      vim.keymap.set("n", "<leader>nl", "<Plug>VimwikiNextLink", { silent = true }) -- For Tab
+      vim.keymap.set("n", "<leader>pl", "<Plug>VimwikiPrevLink", { silent = true }) -- For STab
     end,
   },
   -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
+  {
+    "NvChad/nvim-colorizer.lua",
+    enabled = false,
+  },
 
   -- All NvChad plugins are lazy-loaded by default
   -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`

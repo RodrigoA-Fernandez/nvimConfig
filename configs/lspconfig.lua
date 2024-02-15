@@ -24,7 +24,6 @@ local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "intelephens
 lspconfig.ltex.setup {
   on_attach = function()
     require("ltex-client.server").update_configuration(config_ltex)
-    vim.cmd ":ColorizerDetachFromBuffer"
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,

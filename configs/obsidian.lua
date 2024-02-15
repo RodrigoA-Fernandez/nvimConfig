@@ -2,11 +2,12 @@ local options = {
   workspaces = {
     {
       name = "Apuntes",
-      path = "/home/rodrigo/ApuntesSync/Clases",
+      path = "/home/rodrigo/Documents/ApuntesSync/Clases",
     },
   },
   new_notes_location = "current_dir",
   img_folder = "imagenes",
+  disable_frontmatter = true,
   mappings = {
     ["gf"] = {
       action = function()
