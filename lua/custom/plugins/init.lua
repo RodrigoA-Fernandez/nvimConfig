@@ -83,5 +83,6 @@ return {
       require("nvim-tree").setup()
       vim.keymap.set("n", "<leader>tt", "<Cmd>NvimTreeToggle<CR>", {desc = "[T]oggle file[T]ree"})
     end
-  }
+  },
+  "christoomey/vim-tmux-navigator"
 }
