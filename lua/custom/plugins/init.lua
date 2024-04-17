@@ -10,7 +10,6 @@ return {
       -- Required.
       "nvim-lua/plenary.nvim",
 
-      -- see below for full list of optional dependencies 👇
     },
     config = function()
       local options = {
@@ -84,5 +83,7 @@ return {
       vim.keymap.set("n", "<leader>tt", "<Cmd>NvimTreeToggle<CR>", {desc = "[T]oggle file[T]ree"})
     end
   },
-  "christoomey/vim-tmux-navigator"
+  "christoomey/vim-tmux-navigator",
+  "nvim-treesitter/nvim-treesitter-context",
+  "tpope/vim-fugitive"
 }

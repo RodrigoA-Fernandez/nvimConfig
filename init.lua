@@ -772,5 +772,13 @@ vim.bo.softtabstop = 2
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+vim.keymap.set("n","<C-u>","<C-u>zz")
+vim.keymap.set("n","<C-d>","<C-d>zz")
+
+vim.keymap.set("n","n","nzzzv")
+vim.keymap.set("n","N","Nzzzv")
+
+vim.keymap.set("x","<leader>p", "\"_dP")
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
