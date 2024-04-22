@@ -85,5 +85,6 @@ return {
   },
   "christoomey/vim-tmux-navigator",
   "nvim-treesitter/nvim-treesitter-context",
-  "tpope/vim-fugitive"
+  "tpope/vim-fugitive",
+  "ThePrimeagen/git-worktree.nvim"
 }
