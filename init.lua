@@ -500,9 +500,9 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
-              local server = servers[server_name] or {}
-              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-              require('lspconfig')[server_name].setup(server)
+            local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
           end,
         },
       }
@@ -511,6 +511,7 @@ require('lazy').setup({
 
   { -- Autoformat
     'stevearc/conform.nvim',
+    event = 'InsertEnter',
     keys = {
       {
         '<leader>f',
@@ -561,7 +562,15 @@ require('lazy').setup({
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = {},
+        dependencies = {
+          {
+            'rafamadriz/friendly-snippets',
+          },
+        },
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require 'custom.snippets'
+        end,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -783,8 +792,6 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('x', '<leader>p', '"_dP')
-
-require 'custom.snippets'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

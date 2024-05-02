@@ -1,10 +1,10 @@
-return{
+return {
   'mfussenegger/nvim-jdtls',
-  ft = "java",
+  ft = 'java',
   dependencies = {
     'mfussenegger/nvim-dap',
   },
-  config = function ()
+  config = function()
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
     local status, jdtls = pcall(require, 'jdtls')
@@ -12,8 +12,8 @@ return{
       return
     end
     local extendedClientCapabilities = jdtls.extendedClientCapabilities
-    local cmd; 
-    if vim.loop.os_uname().sysname == "Windows_NT" then
+    local cmd
+    if vim.loop.os_uname().sysname == 'Windows_NT' then
       cmd = {
         '',
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
@@ -27,13 +27,13 @@ return{
         'java.base/java.util=ALL-UNNAMED',
         '--add-opens',
         'java.base/java.lang=ALL-UNNAMED',
-        '-javaagent:' .. vim.fn.glob(vim.fn.expand(vim.fn.stdpath('data').."/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")),
+        '-javaagent:' .. vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar')),
         '-jar',
-        vim.fn.glob(vim.fn.expand(vim.fn.stdpath('data').."/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")),
+        vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar')),
         '-configuration',
-        vim.fn.glob(vim.fn.expand(vim.fn.stdpath("data")..'/mason/packages/jdtls/config_linux')),
+        vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/mason/packages/jdtls/config_linux')),
         '-data',
-        vim.fn.glob(vim.fn.expand(vim.fn.stdpath('data').."/jdtls-workspace/"..project_name)),
+        vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/jdtls-workspace/' .. project_name)),
       }
     else
       local home = os.getenv 'HOME'
@@ -55,7 +55,7 @@ return{
         'java.base/java.lang=ALL-UNNAMED',
         '-javaagent:' .. home .. '/.local/share/nvim/mason/packages/jdtls/lombok.jar',
         '-jar',
-        vim.fn.glob(vim.fn.expand(vim.fn.stdpath('data').."/mason/bin/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")),
+        vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/mason/bin/jdtls/plugins/org.eclipse.equinox.launcher_*.jar')),
         '-configuration',
         home .. '/.local/share/nvim/mason/packages/jdtls/config_linux',
         '-data',
@@ -65,7 +65,7 @@ return{
 
     local config = {
       cmd = cmd,
-      root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' },
+      root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'gradlew' },
 
       settings = {
         java = {
@@ -93,7 +93,7 @@ return{
 
       init_options = {
         bundles = {
-          vim.fn.glob(vim.fn.expand(vim.fn.stdpath('data').."/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar")),
+          vim.fn.glob(vim.fn.expand(vim.fn.stdpath 'data' .. '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')),
         },
       },
     }
@@ -106,7 +106,6 @@ return{
     vim.keymap.set('v', '<leader>crc', "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", { desc = 'Extract Constant' })
     vim.keymap.set('v', '<leader>crm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", { desc = 'Extract Method' })
 
-
     vim.keymap.set('n', '<leader>d', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", { desc = 'Extract Method' })
-  end
+  end,
 }

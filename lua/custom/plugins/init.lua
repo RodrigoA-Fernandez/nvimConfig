@@ -97,4 +97,14 @@ return {
       vim.cmd [[silent! GoInstallDeps]]
     end,
   },
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    config = true,
+    priority = 1000,
+    config = function ()
+      vim.o.background = "dark"
+      vim.cmd("colorscheme gruvbox")
+    end
+  }
 }
