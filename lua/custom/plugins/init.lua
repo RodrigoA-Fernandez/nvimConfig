@@ -4,61 +4,6 @@
 -- See the kickstart.nvim README for more information
 return {
   {
-    'epwalsh/obsidian.nvim',
-    ft = { 'md', 'markdown' },
-    dependencies = {
-      -- Required.
-      'nvim-lua/plenary.nvim',
-    },
-    config = function()
-      local options = {
-        workspaces = {
-          {
-            name = 'Apuntes',
-            path = '/home/rodrigo/Apuntes/Uni/',
-          },
-        },
-        new_notes_location = 'current_dir',
-        img_folder = 'imagenes',
-        disable_frontmatter = true,
-        mappings = {
-          ['gf'] = {
-            action = function()
-              return require('obsidian').util.gf_passthrough()
-            end,
-            opts = { noremap = false, expr = true, buffer = true },
-          },
-          -- Toggle check-boxes.
-          ['<leader>ch'] = {
-            action = function()
-              return require('obsidian').util.toggle_checkbox()
-            end,
-            opts = { buffer = true },
-          },
-        },
-        note_id_func = function(title)
-          -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-          -- In this case a note with the title 'My new note' will be given an ID that looks
-          -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
-          local suffix = ''
-          if title ~= nil then
-            -- If title is given, transform it into valid file name.
-            suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
-          else
-            -- If title is nil, just add 4 random uppercase letters to the suffix.
-            for _ = 1, 4 do
-              suffix = suffix .. string.char(math.random(65, 90))
-            end
-          end
-          return suffix
-        end,
-      }
-
-      require('obsidian').setup(options)
-      vim.opt.conceallevel = 2
-    end,
-  },
-  {
     'nvim-tree/nvim-tree.lua',
     lazy = false,
     opts = {
@@ -98,13 +43,32 @@ return {
     end,
   },
   {
-    "ellisonleao/gruvbox.nvim",
+    'ellisonleao/gruvbox.nvim',
     lazy = false,
     config = true,
     priority = 1000,
-    config = function ()
-      vim.o.background = "dark"
-      vim.cmd("colorscheme gruvbox")
-    end
-  }
+    config = function()
+      vim.o.background = 'dark'
+      vim.cmd 'colorscheme gruvbox'
+    end,
+  },
+  {
+    'jbyuki/nabla.nvim',
+    ft = 'markdown',
+    config = function()
+      vim.keymap.set('n', '<leader>p', require('nabla').popup, { desc = '[P]review Math Equation' })
+      vim.keymap.set('n', '<leader>te', function()
+        if vim.bo.eqrender == nil then
+          vim.bo['eqrender'] = 0
+        end
+        if vim.bo.eqrender == 0 then
+          vim.bo.eqrender = 1
+          require('nabla').enable_virt()
+        else
+          vim.bo.eqrender = 0
+          require('nabla').disable_virt()
+        end
+      end, { desc = '[T]oggle [E]quation Render' })
+    end,
+  },
 }

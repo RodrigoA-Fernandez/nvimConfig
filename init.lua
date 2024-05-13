@@ -546,6 +546,7 @@ require('lazy').setup({
         xhtml = { 'xmlformatter' },
         go = { 'gofumpt' },
         json = { { 'prettierd', 'prettier' } },
+        markdown = { { 'cbfmt' } },
       },
     },
   },
