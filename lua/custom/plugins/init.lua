@@ -71,4 +71,14 @@ return {
       end, { desc = '[T]oggle [E]quation Render' })
     end,
   },
+  'Soares/base16.nvim',
+  {
+    'ZSaberLv0/ZFVimDirDiff',
+    dependencies = {
+      'ZsaberLv0/ZFVimJob',
+      'ZsaberLv0/ZFVimIgnore',
+      'ZsaberLv0/ZFVimBackup',
+    },
+  },
+  'mbbill/undotree',
 }
