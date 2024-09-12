@@ -44,9 +44,11 @@ local latex = {
   s('forall', { t '\\forall ' }),
   s('exists', { t '\\exists ' }),
   s('nabla', { t '\\nabla ' }),
+  s('emptyset', { t '\\emptyset ' }),
 
   s('texto', { t '\\text{', i(1), t '} ', i(0) }),
   s('overline', { t '\\overline{', i(1), t '} ', i(0) }),
+  s('interior', { t '\\mathring{', i(1), t '} ', i(0) }),
 
   -- Letras Griegas
   s('@a ', { t '\\alpha ' }),

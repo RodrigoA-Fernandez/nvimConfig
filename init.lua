@@ -356,9 +356,9 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      'williamboman/mason.nvim',
+      -- 'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      -- 'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -369,6 +369,13 @@ require('lazy').setup({
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
+      local lspconfig = require('lspconfig')
+      local servers = {"marksman"}
+      for _, s in pairs(servers) do
+        lspconfig[s].setup{}
+      end
+      lspconfig.marksman.setup {}
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -464,6 +471,9 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        marksman = {
+          cmd = "marksman",
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -481,33 +491,33 @@ require('lazy').setup({
         },
       }
 
-      require('mason').setup()
+      -- require('mason').setup()
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      -- local ensure_installed = vim.tbl_keys(servers or {})
+      -- vim.list_extend(ensure_installed, {
+      --   'stylua', -- Used to format Lua code
+      -- })
+      -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            if server_name ~= 'jdtls' then
-              local server = servers[server_name] or {}
-              -- This handles overriding only values explicitly passed
-              -- by the server configuration above. Useful when disabling
-              -- certain features of an LSP (for example, turning off formatting for tsserver)
-              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-              require('lspconfig')[server_name].setup(server)
-              local server = servers[server_name] or {}
-              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-              require('lspconfig')[server_name].setup(server)
-            end
-          end,
-        },
-      }
+      -- require('mason-lspconfig').setup {
+      --   handlers = {
+      --     function(server_name)
+      --       if server_name ~= 'jdtls' then
+      --         local server = servers[server_name] or {}
+      --         -- This handles overriding only values explicitly passed
+      --         -- by the server configuration above. Useful when disabling
+      --         -- certain features of an LSP (for example, turning off formatting for tsserver)
+      --         server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      --         require('lspconfig')[server_name].setup(server)
+      --         local server = servers[server_name] or {}
+      --         server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      --         require('lspconfig')[server_name].setup(server)
+      --       end
+      --     end,
+      --   },
+      -- }
     end,
   },
 
@@ -550,7 +560,7 @@ require('lazy').setup({
         json = { { 'prettierd', 'prettier' } },
         markdown = { { 'cbfmt' } },
       },
-    },
+    },   
   },
 
   { -- Autocompletion
