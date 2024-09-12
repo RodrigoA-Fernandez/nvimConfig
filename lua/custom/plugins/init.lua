@@ -34,9 +34,11 @@ return {
     'olexsmir/gopher.nvim',
     ft = 'go',
     config = function(_, opts)
+      vim.cmd.GoInstallDeps()
       require('gopher').setup(opts)
       vim.keymap.set('n', '<leader>gsj', '<cmd> GoTagAdd json<CR>', { desc = 'Add [G]o [S]truct tags for [J]son' })
       vim.keymap.set('n', '<leader>gsy', '<cmd> GoTagAdd yaml<CR>', { desc = 'Add [G]o [S]truct tags for [Y]aml' })
+      vim.keymap.set('n', '<leader>ge', '<cmd> GoIfErr<CR>', { desc = 'Add [G]o if [E]rr' })
     end,
     build = function()
       vim.cmd [[silent! GoInstallDeps]]
