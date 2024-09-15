@@ -36,7 +36,6 @@ vim.opt.cursorline = true
 
 vim.opt.scrolloff = 10
 
-
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -68,7 +67,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -82,12 +81,11 @@ require('lazy').setup({
       },
     },
   },
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
-
 
       require('which-key').add {
         { '<leader>c', group = '[C]ode' },
@@ -118,7 +116,7 @@ require('lazy').setup({
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
@@ -172,14 +170,14 @@ require('lazy').setup({
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
-      local lspconfig = require('lspconfig')
+      local lspconfig = require 'lspconfig'
       local servers = {
-        marksman = {
-          nombre = "marksman",
-        },
+        -- marksman = {
+        --   nombre = 'marksman',
+        -- },
 
         lua_ls = {
-          nombre = "lua_ls",
+          nombre = 'lua_ls',
           settings = {
             Lua = {
               completion = {
@@ -193,9 +191,14 @@ require('lazy').setup({
       }
       for _, s in pairs(servers) do
         lspconfig[s.nombre].setup {
-          settings = s.settings
+          settings = s.settings,
         }
       end
+
+      lspconfig.marksman.setup {
+        on_attatch = LspOnAttach,
+        capabilities = LspCapabilities,
+      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -271,12 +274,12 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { { 'prettierd', 'prettier' } },
+        javascript = { 'prettierd', 'prettier' },
         xml = { 'xmlformatter' },
         xhtml = { 'prettierd' },
         go = { 'gofumpt' },
-        json = { { 'prettierd', 'prettier' } },
-        markdown = { { 'cbfmt' } },
+        json = { 'prettierd', 'prettier' },
+        markdown = { 'cbfmt' },
       },
     },
   },
@@ -343,7 +346,6 @@ require('lazy').setup({
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
-
         },
         sources = {
           { name = 'nvim_lsp' },

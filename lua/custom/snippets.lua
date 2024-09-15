@@ -34,6 +34,11 @@ local latex = {
     i(1),
     t '}',
   }),
+  s('cal', {
+    t '\\mathcal{',
+    i(1),
+    t '}',
+  }),
 
   s('ooo', { t '\\infty ' }),
   s('iff', { t '\\iff ' }),
@@ -109,6 +114,8 @@ local latex = {
   s('=>', { t '\\implies ' }),
   s('cdot', { t '\\cdot ' }),
   s('times', { t '\\times ' }),
+  s('cap', { t '\\cap ' }),
+  s('cup', { t '\\cup ' }),
 
   --Relaciones
   s('neq', { t '\\neq ' }),
@@ -175,6 +182,7 @@ local md = {
   crearBloque 'Corolario',
   crearBloque 'Demostración',
   crearBloque 'Nota',
+  crearBloque 'Example',
 }
 
 ls.add_snippets('markdown', latex)
