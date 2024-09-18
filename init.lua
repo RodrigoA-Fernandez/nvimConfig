@@ -188,9 +188,12 @@ require('lazy').setup({
             },
           },
         },
+        nil_ls = {
+          settings = {},
+        },
       }
-      for _, s in pairs(servers) do
-        lspconfig[s.nombre].setup {
+      for k, s in pairs(servers) do
+        lspconfig[k].setup {
           settings = s.settings,
         }
       end
